@@ -35,7 +35,7 @@ function keepWebAlive() {
   });
 }
 
-setInterval(keepWebAlive, 10 * 1000);
+setInterval(keepWebAlive, 5 * 60 * 1000);
 
 app.listen(port, () => {
   console.log(`服务已启动 | 端口: ${port} | 用户: ${user}`);
