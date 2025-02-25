@@ -31,21 +31,11 @@ function keepWebAlive() {
   const formattedTime = currentDate.toLocaleTimeString();
 
   getProcesses().forEach((command) => {
-    exec(`pgrep -laf "${command}"`, (err, stdout, stderr) => {
-      // 增强错误处理
-      if (err || stderr) {
-        console.error(`${formattedDate}, ${formattedTime}: [进程检查异常] ${command}`, err || stderr);
-        return;
-      }
-
-      if (stdout.includes(command)) {
-        console.log(`${formattedDate}, ${formattedTime}: [运行中] ${command}`);
-      } else {
-        exec(`${command}`, (startErr) => {
-          const status = startErr ? `失败: ${startErr}` : "成功";
-          console.log(`${formattedDate}, ${formattedTime}: [启动${status}] ${command}`);
-        });
-      }
+    const now = new Date();
+  getProcesses().forEach((command) => {
+    exec(`${command}`, (err) => {
+      const status = err ? `失败: ${err}` : "成功";
+      console.log(`[${now.toLocaleString()}] 启动 ${status}: ${command}`);
     });
   });
 }
