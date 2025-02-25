@@ -26,12 +26,7 @@ if (!user || user.length === 0) {
 }
 
 function keepWebAlive() {
-  const currentDate = new Date();
-  const formattedDate = currentDate.toLocaleDateString();
-  const formattedTime = currentDate.toLocaleTimeString();
-
-  getProcesses().forEach((command) => {
-    const now = new Date();
+  const now = new Date();
   getProcesses().forEach((command) => {
     exec(`${command}`, (err) => {
       const status = err ? `失败: ${err}` : "成功";
