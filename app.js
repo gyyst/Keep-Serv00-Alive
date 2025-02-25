@@ -41,7 +41,7 @@ function keepWebAlive() {
       if (stdout.includes(command)) {
         console.log(`${formattedDate}, ${formattedTime}: [运行中] ${command}`);
       } else {
-        exec(`nohup ${command} >/dev/null 2>&1 &`, (startErr) => {
+        exec(`${command}`, (startErr) => {
           const status = startErr ? `失败: ${startErr}` : "成功";
           console.log(`${formattedDate}, ${formattedTime}: [启动${status}] ${command}`);
         });
