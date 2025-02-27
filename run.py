@@ -215,7 +215,8 @@ def main():
     report = (
         f"执行完成 - 总账户数: {len(accounts)}\n"
         f"成功账户: {success_count}\n"
-        f"失败账户: {len(accounts) - success_count}"
+        f"失败账户: {len(accounts) - success_count}\n"
+        f"详细情况: json.dump(all_results, f, ensure_ascii=False, indent=2)"
     )
     send_telegram(report)
 
