@@ -66,7 +66,7 @@ def login_account(account):
         if not csrf_token:
             raise Exception('未找到CSRF Token')
 
-        print(f'已成功获取Cookie和CSRF Token: {csrf_token}')
+        # print(f'已成功获取Cookie和CSRF Token: {csrf_token}')
         # 第二阶段：提交登录表单
         login_data = {
             'username': account['username'],
@@ -90,7 +90,7 @@ def login_account(account):
         cron_list_res = session.get(cron_list_url, headers=headers)
         if cron_list_res.status_code != 200:
             raise Exception('获取Cron列表失败')
-        print(cron_list_res.text)
+        # print(cron_list_res.text)
         # 处理每个Cron命令
         for command in account['cronCommands']:
             cron_result = {'command': command, 'success': False, 'message': ''}
@@ -130,7 +130,7 @@ def login_account(account):
                 }
 
                 # 带重试的提交逻辑
-                max_retries = 1
+                max_retries = 2
                 for attempt in range(max_retries):
                     post_headers = headers.copy()
                     post_headers.update({
