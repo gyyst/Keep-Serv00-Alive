@@ -44,7 +44,7 @@ def login_account(account):
         'cronResults': [],
         'lastRun': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
     }
-
+    print(f'当前用户: {account['username']}')
     try:
         # 初始化请求参数
         base_url = 'https://panel.ct8.pl' if account['type'] == 'ct8' else f'https://panel{account["panelnum"]}.serv00.com'
