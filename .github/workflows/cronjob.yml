@@ -29,8 +29,8 @@ jobs:
         DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
       run: python run.py
 
-    - name: Upload results
-      uses: actions/upload-artifact@v4
-      with:
-        name: cron-results
-        path: last_results.json
+    # - name: Upload results
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: cron-results
+    #     path: last_results.json
