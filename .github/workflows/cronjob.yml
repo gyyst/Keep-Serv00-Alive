@@ -30,7 +30,7 @@ jobs:
       run: python run.py
 
     - name: Upload results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: cron-results
         path: last_results.json
