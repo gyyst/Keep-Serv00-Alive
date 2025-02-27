@@ -1,0 +1,36 @@
+name: Run Cron Jobs
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4
+
+    - name: Run script
+      env:
+        ACCOUNTS_JSON: ${{ secrets.ACCOUNTS_JSON }}
+        TELEGRAM_JSON: ${{ secrets.TELEGRAM_JSON }}
+        DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
+      run: python run.py
+
+    - name: Upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: cron-results
+        path: last_results.json
