@@ -161,7 +161,7 @@ def send_telegram(message):
 def main():
     start_time = time.time()
     all_results = []
-    accounts = json.loads(ACCOUNTS_JSON)['accounts']
+    accounts = ACCOUNTS_JSON['accounts']
     
     for account in accounts:
         result = process_account(account)
