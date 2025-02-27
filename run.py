@@ -209,14 +209,14 @@ def main():
     # 保存结果
     with open(RESULTS_FILE, 'w') as f:
         json.dump(all_results, f, ensure_ascii=False, indent=2)
-
+    
     # 发送总结报告
     success_count = sum(1 for r in all_results if all(c['success'] for c in r['cronResults']))
     report = (
         f"执行完成 - 总账户数: {len(accounts)}\n"
         f"成功账户: {success_count}\n"
         f"失败账户: {len(accounts) - success_count}\n"
-        f"详细情况: json.dump(all_results, f, ensure_ascii=False, indent=2)"
+        f"详细情况: {json.dumps(all_results, indent=2, ensure_ascii=False)}"
     )
     send_telegram(report)
 
