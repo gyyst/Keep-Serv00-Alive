@@ -182,6 +182,36 @@ def login_account(account):
             'message': f'关键错误: {str(e)}'
         }]
         return result_template
+def format_cron_report(data):
+    report = []
+    
+    for user in data:
+        # 转换时间格式
+        last_run = datetime.strptime(user["lastRun"], "%Y-%m-%dT%H:%M:%SZ").strftime("%Y-%m-%d %H:%M:%S UTC")
+        
+        # 构建用户信息
+        user_info = [
+            f"👤 用户: {user['username']} ({user['type']})",
+            f"🕒 最后运行: {last_run}",
+            "📋 Cron结果:"
+        ]
+        
+        # 处理每个cron任务
+        for cron in user["cronResults"]:
+            status = "✅" if cron["success"] else "❌"
+            user_info.append(f"{status} {cron['command']}")
+        
+        report.append("\n".join(user_info))
+    
+    # 添加消息头尾
+    final_report = [
+        "📊 Cron状态报告",
+        "===================",
+        *report,
+        "\n🔔 所有任务状态更新完成"
+    ]
+    
+    return "\n\n".join(final_report)
 
 def send_telegram(message):
     if not TELEGRAM_CONFIG:
@@ -216,7 +246,7 @@ def main():
         f"执行完成 - 总账户数: {len(accounts)}\n"
         f"成功账户: {success_count}\n"
         f"失败账户: {len(accounts) - success_count}\n"
-        f"详细情况: {json.dumps(all_results, indent=2, ensure_ascii=False)}"
+        f"{format_cron_report(all_results)}"
     )
     send_telegram(report)
 
