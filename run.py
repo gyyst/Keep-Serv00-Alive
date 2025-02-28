@@ -7,7 +7,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 # 从环境变量读取配置
-ACCOUNTS_JSON = json.loads(os.getenv('ACCOUNTS_JSON'))
+# ACCOUNTS_JSON = json.loads(os.getenv('ACCOUNTS_JSON'))
+ACCOUNTS_JSON = os.getenv('ACCOUNTS_JSON')
 TELEGRAM_CONFIG = json.loads(os.getenv('TELEGRAM_JSON'))
 PASSWORD = os.getenv('DASHBOARD_PASSWORD')
 RESULTS_FILE = 'last_results.json'
