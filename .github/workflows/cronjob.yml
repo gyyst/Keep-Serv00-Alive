@@ -21,6 +21,13 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install requests beautifulsoup4
+        sudo apt-get update && sudo apt-get install -y jq  # 安装 JSON 处理工具
+
+    # 新增步骤：从 URL 获取 ACCOUNTS_JSON
+    - name: Fetch ACCOUNTS_JSON
+      run: |
+        JSON_CONTENT=$(curl -s https://raw.gyyst.eu.org/gyyst/myprivate/refs/heads/main/serv00/serv00cf%E4%BF%9D%E6%B4%BBcron.json?token=${{ secrets.TOKEN }})  # 替换为实际 URL
+        echo "ACCOUNTS_JSON=$(echo '$JSON_CONTENT' | jq -c)" >> $GITHUB_ENV
 
     - name: Run script
       env:
