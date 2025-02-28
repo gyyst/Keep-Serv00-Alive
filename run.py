@@ -45,7 +45,7 @@ def login_account(account):
         'cronResults': [],
         'lastRun': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
     }
-    print(f'当前用户: {account["username"]}')
+    # print(f'当前用户: {account["username"]}')
     try:
         # 初始化请求参数
         base_url = 'https://panel.ct8.pl' if account['type'] == 'ct8' else f'https://panel{account["panelnum"]}.serv00.com'
@@ -81,7 +81,7 @@ def login_account(account):
             headers=headers,
             allow_redirects=False
         )
-        print(login_res)
+        # print(login_res)
         # 验证登录结果
         if login_res.status_code != 302 or login_res.headers.get('Location') != '/cron/':
             raise Exception('登录失败，凭证错误或验证失败')
