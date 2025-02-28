@@ -7,7 +7,10 @@
 
 缺点是增加了一个nodejs的程序，会增加80M-100M之间的内存占用
 
-一键安装 `bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/node.sh)`
+一键安装 
+```s
+bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/node.sh)
+```
 
 ## 部署步骤
 - 登录Serv00面板，删除注册后自带的网站<br>
