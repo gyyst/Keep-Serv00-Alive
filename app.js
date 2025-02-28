@@ -5,16 +5,11 @@ const execSync = require("child_process").execSync; // 新增同步执行模块
 const app = express();
 const port = 3000;
 
+// 引入 getProcesses 函数
+const getProcesses = require("./processes");
+
 // 自动获取用户名
 const user = execSync("whoami").toString().trim(); // 同步执行并去除换行符
-const pName = "s5";
-
-// 自定义命令数组（修改为函数形式动态生成）
-const getProcesses = () => [
-  `/home/${user}/.npm-global/bin/pm2 resurrect`,
-  `/home/${user}/.npm-global/bin/pm2 save`,
-  // 可以添加其他需要监控的命令
-];
 
 app.use(express.static(path.join(__dirname, 'static')));
 
@@ -35,7 +30,7 @@ function keepWebAlive() {
   });
 }
 
-setInterval(keepWebAlive, 5 * 60 * 1000);
+setInterval(keepWebAlive, 2 * 60 * 1000);
 
 app.listen(port, () => {
   console.log(`服务已启动 | 端口: ${port} | 用户: ${user}`);
