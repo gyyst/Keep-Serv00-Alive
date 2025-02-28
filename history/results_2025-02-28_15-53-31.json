@@ -1,0 +1,138 @@
+[
+  {
+    "username": "nft5027",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nft5027/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nft5027/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nft5027/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nft5027/.npm-global/bin/pm2 save"
+      }
+    ],
+    "lastRun": "2025-02-28T15:49:20Z"
+  },
+  {
+    "username": "nft8gq185",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nft8gq185/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nft8gq185/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nft8gq185/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nft8gq185/.npm-global/bin/pm2 save"
+      }
+    ],
+    "lastRun": "2025-02-28T15:49:44Z"
+  },
+  {
+    "username": "cmo13698",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/cmo13698/.npm-global/bin/pm2 resurrect",
+        "success": false,
+        "message": "添加后验证失败"
+      },
+      {
+        "command": "/home/cmo13698/.npm-global/bin/pm2 save",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-02-28T15:50:15Z"
+  },
+  {
+    "username": "hpzjajxgbn",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/hpzjajxgbn/.npm-global/bin/pm2 resurrect",
+        "success": false,
+        "message": "添加后验证失败"
+      },
+      {
+        "command": "/home/hpzjajxgbn/.npm-global/bin/pm2 save",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-02-28T15:50:57Z"
+  },
+  {
+    "username": "pynppotvz",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/pynppotvz/.npm-global/bin/pm2 resurrect",
+        "success": false,
+        "message": "添加后验证失败"
+      },
+      {
+        "command": "/home/pynppotvz/.npm-global/bin/pm2 save",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-02-28T15:51:41Z"
+  },
+  {
+    "username": "nblrxbwpic",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nblrxbwpic/.npm-global/bin/pm2 resurrect",
+        "success": false,
+        "message": "添加后验证失败"
+      },
+      {
+        "command": "/home/nblrxbwpic/.npm-global/bin/pm2 save",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-02-28T15:52:20Z"
+  },
+  {
+    "username": "yrqlrgt",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/yrqlrgt/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/yrqlrgt/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/yrqlrgt/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/yrqlrgt/.npm-global/bin/pm2 save"
+      }
+    ],
+    "lastRun": "2025-02-28T15:52:54Z"
+  },
+  {
+    "username": "gryfaem",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/gryfaem/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/gryfaem/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/gryfaem/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/gryfaem/.npm-global/bin/pm2 save"
+      }
+    ],
+    "lastRun": "2025-02-28T15:53:08Z"
+  }
+]
