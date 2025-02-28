@@ -29,8 +29,10 @@ jobs:
         DASHBOARD_PASSWORD: ${{ secrets.DASHBOARD_PASSWORD }}
       run: python run.py
 
-    # - name: Upload results
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: cron-results
-    #     path: last_results.json
+    - name: Commit history files
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add history/
+        git commit -m "Add cron job results for $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+        git push
