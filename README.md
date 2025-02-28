@@ -12,7 +12,7 @@
 bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/node.sh)
 ```
 
-## 部署步骤
+## 手动部署步骤
 - 登录Serv00面板，删除注册后自带的网站<br>
 ![](imgs/1.png)
 
