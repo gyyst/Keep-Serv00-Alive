@@ -226,7 +226,15 @@ def send_telegram(message):
         }, timeout=10)
     except Exception as e:
         print(f'Telegram通知失败: {str(e)}')
-
+        
+def cleanup_old_files(directory, days_to_keep=30):
+    now = time.time()
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):
+            file_age = now - os.path.getmtime(filepath)
+            if file_age > days_to_keep * 86400:  # 删除超过指定天数的文件
+                os.remove(filepath)
 def main():
     all_results = []
     accounts = ACCOUNTS_JSON['accounts']
@@ -236,7 +244,18 @@ def main():
         all_results.append(result)
         time.sleep(random.randint(1, 5))
 
-    print(all_results)
+    # 创建 history 目录（如果不存在）
+    history_dir = 'history'
+    os.makedirs(history_dir, exist_ok=True)
+
+    # 生成带时间戳的文件名
+    timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    history_file = os.path.join(history_dir, f'results_{timestamp}.json')
+
+    # 保存结果到 history 目录
+    with open(history_file, 'w') as f:
+        json.dump(all_results, f, ensure_ascii=False, indent=2)
+    cleanup_old_files('history', days_to_keep=30)
     # 保存结果
     with open(RESULTS_FILE, 'w') as f:
         json.dump(all_results, f, ensure_ascii=False, indent=2)
