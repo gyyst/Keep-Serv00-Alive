@@ -173,7 +173,7 @@ def login_account(account):
                 result_template['cronResults'].append(cron_result)
 
             # 添加随机延迟
-            time.sleep(random.randint(1, 8))
+            time.sleep(random.randint(5, 15))
 
         return result_template
 
@@ -242,7 +242,7 @@ def main():
     for account in accounts:
         result = login_account(account)
         all_results.append(result)
-        time.sleep(random.randint(1, 5))
+        time.sleep(random.randint(10, 30))
 
     # 创建 history 目录（如果不存在）
     history_dir = 'history'
