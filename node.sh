@@ -20,18 +20,15 @@ PUBLIC_NODEJS_DIR="$WEBSITE_DIR/public_nodejs"
 
 # 重命名 public 目录
 echo "正在配置目录结构..."
-ssh -t $USERNAME@$DOMAIN "
-cd '$PUBLIC_NODEJS_DIR' && 
+cd $PUBLIC_NODEJS_DIR 
 mv public static && 
 echo '目录重命名完成'
-"
 
 # 安装依赖
 echo "正在安装 Node.js 依赖..."
-ssh -t $USERNAME@$DOMAIN "
-cd '$PUBLIC_NODEJS_DIR' && 
+cd $PUBLIC_NODEJS_DIR
 npm22 install express
-"
+
 cd $PUBLIC_NODEJS_DIR
 bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/download.sh)
 
