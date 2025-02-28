@@ -31,10 +31,9 @@ jobs:
 
     - name: Run script
       env:
-        ACCOUNTS_JSON: ${{ env.ACCOUNTS_JSON }}
+        HOST_URL: ${{ secrets.HOST_URL }}
         TELEGRAM_JSON: ${{ secrets.TELEGRAM_JSON }}
       run: |
-        echo "::add-mask::$ACCOUNTS_JSON"
         python run.py
 
     - name: Commit history files

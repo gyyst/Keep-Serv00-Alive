@@ -6,10 +6,43 @@ import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
 
+# 新增：从 URL 获取账户配置
+def fetch_accounts_from_url():
+    host_url = os.getenv('HOST_URL')
+    if not host_url:
+        raise ValueError("❌ HOST_URL 环境变量未设置")
+
+    try:
+        # 添加请求头避免被拦截
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'application/json'
+        }
+        
+        # 添加 10 秒超时和 SSL 验证
+        response = requests.get(
+            host_url,
+            headers=headers,
+            timeout=10,
+            verify=True
+        )
+        response.raise_for_status()  # 检查 HTTP 状态码
+        
+        # 验证 JSON 结构
+        data = response.json()
+        if 'accounts' not in data:
+            raise ValueError("⚠️ 无效的 JSON 结构: 缺少 accounts 字段")
+        
+        return data
+    
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"🔗 网络请求失败: {str(e)}")
+    except json.JSONDecodeError:
+        raise Exception("📄 响应内容不是有效 JSON")
+
 # 从环境变量读取配置
-ACCOUNTS_JSON = json.loads(os.getenv('ACCOUNTS_JSON'))
+ACCOUNTS_JSON = fetch_accounts_from_url()
 TELEGRAM_CONFIG = json.loads(os.getenv('TELEGRAM_JSON'))
-PASSWORD = os.getenv('DASHBOARD_PASSWORD')
 RESULTS_FILE = 'last_results.json'
 
 def generate_random_user_agent():
