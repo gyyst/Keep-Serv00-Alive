@@ -28,14 +28,14 @@ jobs:
       run: |
         JSON_CONTENT=$(curl -s ${{ secrets.HOST_URL }})  # 替换为实际 URL
         echo "ACCOUNTS_JSON=$(echo $JSON_CONTENT | jq -c)" >> "$GITHUB_ENV"
-        echo "::add-mask::${{ env.ACCOUNTS_JSON }}"
-
 
     - name: Run script
       env:
         ACCOUNTS_JSON: ${{ env.ACCOUNTS_JSON }}
         TELEGRAM_JSON: ${{ secrets.TELEGRAM_JSON }}
-      run: python run.py
+      run: |
+        echo "::add-mask::$ACCOUNTS_JSON"
+        python run.py
 
     - name: Commit history files
       run: |
