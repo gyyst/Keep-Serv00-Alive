@@ -21,7 +21,7 @@ PUBLIC_NODEJS_DIR="$WEBSITE_DIR/public_nodejs"
 # 重命名 public 目录
 echo "正在配置目录结构..."
 cd $PUBLIC_NODEJS_DIR 
-mv public static && 
+mv public static
 echo '目录重命名完成'
 
 # 安装依赖
