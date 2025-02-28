@@ -26,7 +26,7 @@ jobs:
     # 新增步骤：从 URL 获取 ACCOUNTS_JSON
     - name: Fetch ACCOUNTS_JSON
       run: |
-        JSON_CONTENT=$(curl -s https://raw.gyyst.eu.org/gyyst/myprivate/refs/heads/main/serv00/serv00cf%E4%BF%9D%E6%B4%BBcron.json?token=${{ secrets.TOKEN }})  # 替换为实际 URL
+        JSON_CONTENT=$(curl -s ${{ secrets.HOST_URL }})  # 替换为实际 URL
         echo "ACCOUNTS_JSON=$(echo $JSON_CONTENT | jq -c)" >> "$GITHUB_ENV"
 
 
