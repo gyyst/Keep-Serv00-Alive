@@ -19,7 +19,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/h
 - 点击Delete(purge website files)清空网站文件<br>
 ![](imgs/2.png)
 
-- 创建新网站，域名填写你想用的域名，我这里使用的是注册时自带的，网站类型设置为Node.js，程序版本选择NOde.js v22.4.1
+- 创建新网站，域名填写你想用的域名，我这里使用的是注册时自带的，网站类型设置为Node.js，程序版本选择Node.js v22.4.1
 ![](imgs/3.png)
 
 - SSH登录Serv00，输入cd domains/你的网站域名/public_nodejs/
