@@ -5,6 +5,10 @@
 
 这个方案利用了Serv00自带Apache服务器的Phusion Passenger插件功能，每次访问网页时可以唤醒Nodejs程序，因而不需要借助Cron就能够进行保活，自然没有了被杀Cron计划任务的烦扰
 
+缺点是增加了一个nodejs的程序，会增加80M-100M之间的内存占用
+
+一键安装 `bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/node.sh)`
+
 ## 部署步骤
 - 登录Serv00面板，删除注册后自带的网站<br>
 ![](imgs/1.png)
