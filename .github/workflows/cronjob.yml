@@ -28,8 +28,8 @@ jobs:
       run: |
         JSON_CONTENT=$(curl -s https://raw.gyyst.eu.org/gyyst/myprivate/refs/heads/main/serv00/serv00cf%E4%BF%9D%E6%B4%BBcron.json?token=${{ secrets.TOKEN }})  # 替换为实际 URL
         echo $JSON_CONTENT
-        ehco "{"json":"json"}"
-        echo "ACCOUNTS_JSON=$(echo '$JSON_CONTENT' | jq -c)" >> "$GITHUB_ENV"
+        echo "{"json":"json"}"
+        echo "ACCOUNTS_JSON=$(echo $JSON_CONTENT | jq -c)" >> "$GITHUB_ENV"
         echo $ACCOUNTS_JSON
 
     - name: Run script
