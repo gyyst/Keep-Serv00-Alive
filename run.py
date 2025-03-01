@@ -275,7 +275,7 @@ def format_cron_report(data):
         # 处理每个cron任务
         for cron in user["cronResults"]:
             status = "✅" if cron["success"] else "❌"
-            user_info.append(f"{status} {cron["command"]}")
+            user_info.append(f"{status} {cron['command']}")
         
         report.append("\n".join(user_info))
     
