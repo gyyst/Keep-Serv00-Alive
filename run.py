@@ -61,15 +61,31 @@ def get_csrf_token(html):
     csrf_input = soup.find('input', {'name': 'csrfmiddlewaretoken'})
     return csrf_input['value'] if csrf_input else None
 
-def combine_cookies(*cookies_list):
-    cookie_dict = {}
-    for cookies in cookies_list:
-        if cookies:
-            for cookie in cookies.split('; '):
-                if '=' in cookie:
-                    name, value = cookie.split('=', 1)
-                    cookie_dict[name.strip()] = value.split(';', 1)[0].strip()
-    return '; '.join([f'{k}={v}' for k, v in cookie_dict.items()])
+def combine_cookies(cookies1, cookies2):
+    cookie_map = {}
+    
+    def parse_cookie_string(cookie_str):
+        cookie_str = cookie_str or ''  # 处理None的情况
+        for cookie in cookie_str.split(','):
+            cookie = cookie.strip()
+            if not cookie:
+                continue
+            # 提取分号前的内容并去除空格
+            cookie_part = cookie.split(';', 1)[0].strip()
+            # 分割cookie名称和值
+            parts = cookie_part.split('=', 1)
+            if len(parts) != 2:
+                continue
+            name, value = parts[0].strip(), parts[1].strip()
+            # 仅当名称和值都存在时保存
+            if name and value:
+                cookie_map[name] = value
+    
+    parse_cookie_string(cookies1)
+    parse_cookie_string(cookies2)
+    
+    # 生成合并后的cookie字符串
+    return '; '.join([f"{name}={value}" for name, value in cookie_map.items()])
 
 def login_account(account):
     result_template = {
@@ -78,7 +94,6 @@ def login_account(account):
         'cronResults': [],
         'lastRun': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
     }
-    # print(f'当前用户: {account["username"]}')
     try:
         # 初始化请求参数
         base_url = 'https://panel.ct8.pl' if account['type'] == 'ct8' else f'https://panel{account["panelnum"]}.serv00.com'
@@ -99,8 +114,7 @@ def login_account(account):
         csrf_token = get_csrf_token(init_res.text)
         if not csrf_token:
             raise Exception('未找到CSRF Token')
-
-        # print(f'已成功获取Cookie和CSRF Token: {csrf_token}')
+        initialCookies=init_res.headers['set-cookie']
         # 第二阶段：提交登录表单
         login_data = {
             'username': account['username'],
@@ -108,23 +122,39 @@ def login_account(account):
             'csrfmiddlewaretoken': csrf_token,
             'next': '/cron/'
         }
+        headers.update({
+                        "Cookie":initialCookies,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    })
         login_res = session.post(
             login_url,
             data=login_data,
-            headers=headers,
+            headers={
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Referer': login_url,
+            'User-Agent': user_agent,
+            'Cookie': initialCookies,
+            },
             allow_redirects=False
         )
-        # print(login_res)
         # 验证登录结果
-        if login_res.status_code != 302 or login_res.headers.get('Location') != '/cron/':
+        if login_res.status_code != 302 or login_res.headers.get('location') != '/cron/':
             raise Exception('登录失败，凭证错误或验证失败')
+        loginCookies = login_res.headers.get('set-cookie')
 
+        allCookies=combine_cookies(initialCookies,loginCookies)
         # 第三阶段：获取Cron列表
         cron_list_url = f'{base_url}/cron/'
-        cron_list_res = session.get(cron_list_url, headers=headers)
+        headers.update({
+            'Cookie':allCookies
+        })
+        cron_list_res = session.get(cron_list_url, headers={
+          'Cookie': allCookies,
+          'User-Agent': user_agent,
+        })
         if cron_list_res.status_code != 200:
             raise Exception('获取Cron列表失败')
-        # print(cron_list_res.text)
+
         # 处理每个Cron命令
         for command in account['cronCommands']:
             cron_result = {'command': command, 'success': False, 'message': ''}
@@ -139,9 +169,14 @@ def login_account(account):
                     continue
 
                 # 获取添加页面的CSRF
-                add_cron_url = f'{base_url}/cron/add/'
-                add_page_res = session.get(add_cron_url, headers=headers)
+                add_cron_url = f'{base_url}/cron/add'
+                add_page_res = session.get(add_cron_url, headers={
+                    'Cookie': allCookies,
+                    'User-Agent': user_agent,
+                    'Referer': cron_list_url,
+                })
                 new_csrf = get_csrf_token(add_page_res.text)
+
                 if not new_csrf:
                     raise Exception('添加页面CSRF获取失败')
 
@@ -166,24 +201,31 @@ def login_account(account):
                 # 带重试的提交逻辑
                 max_retries = 2
                 for attempt in range(max_retries):
-                    post_headers = headers.copy()
-                    post_headers.update({
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Origin': base_url,
-                        'Referer': add_cron_url
-                    })
                     
                     add_res = session.post(
                         add_cron_url,
                         data=form_data,
-                        headers=post_headers,
+                        headers={
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Cookie': allCookies,
+                        'User-Agent': user_agent,
+                        'Referer': add_cron_url,
+                        'Origin': base_url,
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                        'Accept-Language': 'en-US,en;q=0.5',
+                        'Upgrade-Insecure-Requests': '1'
+                        },
                         allow_redirects=False
                     )
 
                     # 检查响应状态
                     if add_res.status_code in [302, 200]:
                         # 二次验证是否真正添加成功
-                        verify_res = session.get(cron_list_url, headers=headers)
+                        verify_res = session.get(cron_list_url, headers={
+                            'Cookie': allCookies,
+                            'User-Agent': user_agent,
+                        })
+
                         if command in verify_res.text:
                             cron_result.update({
                                 'success': True,
@@ -206,7 +248,7 @@ def login_account(account):
                 result_template['cronResults'].append(cron_result)
 
             # 添加随机延迟
-            time.sleep(random.randint(5, 15))
+            time.sleep(random.randint(1, 8))
 
         return result_template
 
@@ -233,7 +275,7 @@ def format_cron_report(data):
         # 处理每个cron任务
         for cron in user["cronResults"]:
             status = "✅" if cron["success"] else "❌"
-            user_info.append(f"{status} {cron['command']}")
+            user_info.append(f"{status} {cron["command"]}")
         
         report.append("\n".join(user_info))
     
@@ -275,7 +317,7 @@ def main():
     for account in accounts:
         result = login_account(account)
         all_results.append(result)
-        time.sleep(random.randint(10, 30))
+        time.sleep(random.randint(1, 5))
 
     # 创建 history 目录（如果不存在）
     history_dir = 'history'
