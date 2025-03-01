@@ -4,6 +4,8 @@
 USERNAME=$(whoami)
 DEFAULT_DOMAIN="cron.${USERNAME}.serv00.net"
 read -p "请输入域名（默认: $DEFAULT_DOMAIN）: " DOMAIN
+IP=$(devil vhost list all | awk '/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/ {print $1; exit}')
+echo "请将域名A记录指向->$IP"
 DOMAIN=${DOMAIN:-$DEFAULT_DOMAIN}
 NODE="/usr/local/bin/node22"
 
