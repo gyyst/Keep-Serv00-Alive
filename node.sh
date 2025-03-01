@@ -2,7 +2,9 @@
 
 # 输入参数
 USERNAME=$(whoami)
-DOMAIN="cron.${USERNAME}.serv00.net"
+DEFAULT_DOMAIN="cron.${USERNAME}.serv00.net"
+read -p "请输入域名（默认: $DEFAULT_DOMAIN）: " DOMAIN
+DOMAIN=${DOMAIN:-$DEFAULT_DOMAIN}
 NODE="/usr/local/bin/node22"
 
 # 删除旧网站 (强制清除)
