@@ -1,0 +1,224 @@
+[
+  {
+    "username": "nft5027",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nft5027/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nft5027/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nft5027/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nft5027/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/nft5027/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:29:45Z"
+  },
+  {
+    "username": "nft8gq185",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nft8gq185/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nft8gq185/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nft8gq185/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nft8gq185/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/nft8gq185/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:30:01Z"
+  },
+  {
+    "username": "ppuas10",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/ppuas10/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/ppuas10/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/ppuas10/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/ppuas10/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/ppuas10/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:30:14Z"
+  },
+  {
+    "username": "cmo13698",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/cmo13698/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/cmo13698/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/cmo13698/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/cmo13698/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/cmo13698/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:30:33Z"
+  },
+  {
+    "username": "hpzjajxgbn",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/hpzjajxgbn/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/hpzjajxgbn/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/hpzjajxgbn/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/hpzjajxgbn/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/hpzjajxgbn/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:30:52Z"
+  },
+  {
+    "username": "pynppotvz",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/pynppotvz/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/pynppotvz/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/pynppotvz/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/pynppotvz/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/pynppotvz/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:31:07Z"
+  },
+  {
+    "username": "nblrxbwpic",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nblrxbwpic/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nblrxbwpic/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nblrxbwpic/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nblrxbwpic/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/nblrxbwpic/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:31:21Z"
+  },
+  {
+    "username": "yrqlrgt",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/yrqlrgt/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/yrqlrgt/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/yrqlrgt/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/yrqlrgt/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/yrqlrgt/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:31:36Z"
+  },
+  {
+    "username": "gryfaem",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/gryfaem/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/gryfaem/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/gryfaem/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/gryfaem/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/gryfaem/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:31:53Z"
+  },
+  {
+    "username": "doram",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "bash /home/doram/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-09T12:32:04Z"
+  },
+  {
+    "username": "cpjqeW6AAWsxN",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "bash /home/cpjqeW6AAWsxN/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+      }
+    ],
+    "lastRun": "2025-03-09T12:32:17Z"
+  }
+]
