@@ -5,6 +5,7 @@ import random
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
+import html
 
 # 新增：从 URL 获取账户配置
 def fetch_accounts_from_url():
@@ -160,7 +161,8 @@ def login_account(account):
             cron_result = {'command': command, 'success': False, 'message': ''}
             try:
                 # 检查是否已存在
-                if command in cron_list_res.text:
+                escaped_command = html.escape(command, quote=True)
+                if escaped_command in cron_list_res.text:
                     cron_result.update({
                         'success': True,
                         'message': f'Cron已存在: {command}'
