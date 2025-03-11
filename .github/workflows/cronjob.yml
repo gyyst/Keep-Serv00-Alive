@@ -1,4 +1,4 @@
-name: Run Cron Jobs
+name: Run Serv00 Cron Jobs
 
 on:
   schedule:
