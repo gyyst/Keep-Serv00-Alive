@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 定义文件下载的 URL
-APP_JS_URL="https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/app.js"
-PROCESSES_JS_URL="https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/processes.js"
+APP_JS_URL="https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/serv00/app.js"
+PROCESSES_JS_URL="https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/serv00/processes.js"
 
 # 定义本地保存的文件名
 APP_JS_FILE="app.js"

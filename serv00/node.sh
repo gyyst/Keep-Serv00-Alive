@@ -34,7 +34,7 @@ cd $PUBLIC_NODEJS_DIR
 npm22 install express
 
 cd $PUBLIC_NODEJS_DIR
-bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/download.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/gyyst/Keep-Serv00-Alive/refs/heads/main/serv00/download.sh)
 
 echo "----------------------------------------"
 echo "部署完成！请通过以下方式验证："

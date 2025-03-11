@@ -34,7 +34,7 @@ jobs:
         HOST_URL: ${{ secrets.HOST_URL }}
         TELEGRAM_JSON: ${{ secrets.TELEGRAM_JSON }}
       run: |
-        python run.py
+        python serv00/Serv00Cron.py
 
     - name: Commit history files
       run: |

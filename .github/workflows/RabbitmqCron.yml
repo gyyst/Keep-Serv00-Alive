@@ -1,0 +1,29 @@
+name: Send Ping to RabbitMQ
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'  # 每小时执行一次（可调整为其他时间）
+
+jobs:
+  send-ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pika requests
+
+      - name: Run the script
+        env:
+          RABBITMQ_CONFIG_URL: ${{ secrets.RABBITMQ_CONFIG_URL }}
+        run: |
+          python rabbitmq/RabbitmqCron.py
