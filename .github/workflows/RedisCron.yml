@@ -27,4 +27,4 @@ jobs:
         env:
           REDIS_CONFIG_URL: ${{ secrets.REDIS_CONFIG_URL }}  # 从仓库Secrets读取URL
         run: |
-          python redis/redis.py
+          python redis/RedisCron.py
