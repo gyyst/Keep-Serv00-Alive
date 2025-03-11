@@ -1,0 +1,29 @@
+name: "Redis Key Updater"
+
+on:
+  
+  schedule:
+    # 每天凌晨2点执行（可自定义cron表达式）
+    - cron: "0 2 * * *"
+
+jobs:
+  update-redis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          pip install redis requests
+
+      - name: Run Redis update script
+        env:
+          REDIS_CONFIG_URL: ${{ secrets.REDIS_CONFIG_URL }}  # 从仓库Secrets读取URL
+        run: |
+          python redis/redis.py
