@@ -1,0 +1,224 @@
+[
+  {
+    "username": "nft5027",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nft5027/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nft5027/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nft5027/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nft5027/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/nft5027/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/nft5027/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:40:54Z"
+  },
+  {
+    "username": "nft8gq185",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nft8gq185/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/nft8gq185/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/nft8gq185/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/nft8gq185/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/nft8gq185/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/nft8gq185/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:41:14Z"
+  },
+  {
+    "username": "ppuas10",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/ppuas10/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/ppuas10/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/ppuas10/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/ppuas10/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/ppuas10/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/ppuas10/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:41:37Z"
+  },
+  {
+    "username": "cmo13698",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/cmo13698/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "成功添加Cron: /home/cmo13698/.npm-global/bin/pm2 resurrect (尝试次数: 1)"
+      },
+      {
+        "command": "/home/cmo13698/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "成功添加Cron: /home/cmo13698/.npm-global/bin/pm2 save (尝试次数: 1)"
+      },
+      {
+        "command": "bash /home/cmo13698/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-11T01:41:51Z"
+  },
+  {
+    "username": "hpzjajxgbn",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/hpzjajxgbn/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "成功添加Cron: /home/hpzjajxgbn/.npm-global/bin/pm2 resurrect (尝试次数: 1)"
+      },
+      {
+        "command": "/home/hpzjajxgbn/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "成功添加Cron: /home/hpzjajxgbn/.npm-global/bin/pm2 save (尝试次数: 1)"
+      },
+      {
+        "command": "bash /home/hpzjajxgbn/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-11T01:43:00Z"
+  },
+  {
+    "username": "pynppotvz",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/pynppotvz/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "成功添加Cron: /home/pynppotvz/.npm-global/bin/pm2 resurrect (尝试次数: 1)"
+      },
+      {
+        "command": "/home/pynppotvz/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "成功添加Cron: /home/pynppotvz/.npm-global/bin/pm2 save (尝试次数: 1)"
+      },
+      {
+        "command": "bash /home/pynppotvz/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-11T01:44:06Z"
+  },
+  {
+    "username": "nblrxbwpic",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/nblrxbwpic/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "成功添加Cron: /home/nblrxbwpic/.npm-global/bin/pm2 resurrect (尝试次数: 1)"
+      },
+      {
+        "command": "/home/nblrxbwpic/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "成功添加Cron: /home/nblrxbwpic/.npm-global/bin/pm2 save (尝试次数: 1)"
+      },
+      {
+        "command": "bash /home/nblrxbwpic/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": false,
+        "message": "添加后验证失败"
+      }
+    ],
+    "lastRun": "2025-03-11T01:45:16Z"
+  },
+  {
+    "username": "yrqlrgt",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/yrqlrgt/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/yrqlrgt/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/yrqlrgt/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/yrqlrgt/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/yrqlrgt/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/yrqlrgt/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:46:28Z"
+  },
+  {
+    "username": "gryfaem",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "/home/gryfaem/.npm-global/bin/pm2 resurrect",
+        "success": true,
+        "message": "Cron已存在: /home/gryfaem/.npm-global/bin/pm2 resurrect"
+      },
+      {
+        "command": "/home/gryfaem/.npm-global/bin/pm2 save",
+        "success": true,
+        "message": "Cron已存在: /home/gryfaem/.npm-global/bin/pm2 save"
+      },
+      {
+        "command": "bash /home/gryfaem/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/gryfaem/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:46:49Z"
+  },
+  {
+    "username": "doram",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "bash /home/doram/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/doram/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:47:00Z"
+  },
+  {
+    "username": "cpjqeW6AAWsxN",
+    "type": "serv00",
+    "cronResults": [
+      {
+        "command": "bash /home/cpjqeW6AAWsxN/serv00-play/keepalive.sh > /dev/null 2>&1",
+        "success": true,
+        "message": "Cron已存在: bash /home/cpjqeW6AAWsxN/serv00-play/keepalive.sh > /dev/null 2>&1"
+      }
+    ],
+    "lastRun": "2025-03-11T01:47:14Z"
+  }
+]
