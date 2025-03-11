@@ -30,10 +30,9 @@ def update_redis(config):
             db=db,
             socket_timeout=5
         )
-        # 删除现有键
-        r.delete("a")
         # 写入新值
-        r.set("a", "b")
+        r.set("ping", "pong")
+        r.expire("ping",10*60)
         print(f"✅ Updated Redis: {host}:{port}")
     except Exception as e:
         print(f"❌ Failed to update {host}:{port}: {str(e)}")
