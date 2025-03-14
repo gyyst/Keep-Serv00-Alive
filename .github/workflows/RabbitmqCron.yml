@@ -3,7 +3,7 @@ name: Send Ping to RabbitMQ
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # 每小时执行一次（可调整为其他时间）
+    - cron: '0 0 * * *'  # 每天执行一次（可调整为其他时间）
 
 jobs:
   send-ping:
