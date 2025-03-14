@@ -277,7 +277,11 @@ def format_cron_report(data):
         # 处理每个cron任务
         for cron in user["cronResults"]:
             status = "✅" if cron["success"] else "❌"
-            user_info.append(f"{status} {cron['command']}")
+            if cron["success"]:
+                user_info.append(f"{status} {cron['command']}")
+            else:
+                # 失败时显示命令和失败原因
+                user_info.append(f"{status} {cron['command']} - 失败原因: {cron['message']}")
         
         report.append("\n".join(user_info))
     
@@ -330,9 +334,9 @@ def main():
     history_file = os.path.join(history_dir, f'results_{timestamp}.json')
 
     # 保存结果到 history 目录
-    with open(history_file, 'w') as f:
-        json.dump(all_results, f, ensure_ascii=False, indent=2)
-    cleanup_old_files('history', days_to_keep=30)
+    # with open(history_file, 'w') as f:
+    #     json.dump(all_results, f, ensure_ascii=False, indent=2)
+    # cleanup_old_files('history', days_to_keep=30)
     # 保存结果
     with open(RESULTS_FILE, 'w') as f:
         json.dump(all_results, f, ensure_ascii=False, indent=2)
