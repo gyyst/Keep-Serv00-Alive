@@ -118,11 +118,11 @@ def cleanup_old_files(directory, keep_count=5, file_prefix='keepalive_'):
     
     return deleted_count
 
-def cleanup_all_txt_files(directory='keepalive', keep_count=5):
+def cleanup_all_txt_files(directory='keepAlive', keep_count=5):
     """清理指定目录中的所有txt文件，只保留最新的几个
     
     Args:
-        directory (str): 要清理的目录路径，默认为'keepalive'
+        directory (str): 要清理的目录路径，默认为'keepAlive'
         keep_count (int): 要保留的最新文件数量，默认为5
     """
     print(f"开始清理 {directory} 目录中的旧txt文件...")
