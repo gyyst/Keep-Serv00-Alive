@@ -25,6 +25,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add README.md keepalive/
+          git add README.md keepAlive/
           git commit -m "🤖 自动更新: 保持仓库活跃 $(date +'%Y-%m-%d')" || echo "No changes to commit"
           git push
