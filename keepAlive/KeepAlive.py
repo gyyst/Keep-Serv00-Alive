@@ -67,7 +67,7 @@ def update_status_file():
 
 def create_keepalive_file():
     """创建一个包含当前时间戳的文件"""
-    keepalive_dir = 'keepalive'
+    keepalive_dir = 'keepAlive'
     os.makedirs(keepalive_dir, exist_ok=True)
     
     # 清理旧文件，只保留最新的5个文件
