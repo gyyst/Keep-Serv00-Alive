@@ -278,10 +278,10 @@ def format_cron_report(data):
         for cron in user["cronResults"]:
             status = "✅" if cron["success"] else "❌"
             if cron["success"]:
-                user_info.append(f"{status} {cron['command']}")
+                user_info.append(f"{status} {cron["command"]}")
             else:
                 # 失败时显示命令和失败原因
-                user_info.append(f"{status} {cron['command']} - 失败原因: {cron['message']}")
+                user_info.append(f"{status} {cron["command"]} - 失败原因: {cron["message"]}")
         
         report.append("\n".join(user_info))
     
