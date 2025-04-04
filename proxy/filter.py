@@ -11,9 +11,7 @@ path = parsed_url.path
 
 # 从result.txt读取内容作为payload
 # 使用os.path获取绝对路径，确保在不同环境下都能正确找到文件
-current_dir = os.path.dirname(os.path.abspath(__file__))
-result_file_path = os.path.join(current_dir, 'result.txt')
-with open(result_file_path, 'r', encoding='utf-8') as f:
+with open('proxy/result.txt', 'r', encoding='utf-8') as f:
     payload = f.read().strip()
 
 headers = {
