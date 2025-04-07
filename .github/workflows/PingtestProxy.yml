@@ -36,7 +36,7 @@ jobs:
 
       - name: Run clash-speedtest
         env:
-          TEST_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取TEST_URL
+          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取TEST_URL
         run: |
           proxy/clash-speedtest -c $SUB_URL -output proxy/result.txt -concurrent 8 -max-latency 1000ms -fast 
 
