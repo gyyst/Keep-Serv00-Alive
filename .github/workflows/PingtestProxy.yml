@@ -3,8 +3,7 @@ name: Pingtest Proxyz Node
 on:
   workflow_dispatch:
   schedule:
-    # 每天中国时间晚上8点执行（可自定义cron表达式）
-    - cron: "0 * * * *"
+    - cron: "0 4-16 * * *"
 
 jobs:
   speedtest-proxy:
