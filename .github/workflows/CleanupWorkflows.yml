@@ -26,7 +26,7 @@ jobs:
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.repository.name }}
           # 可选配置
-          DAYS_TO_KEEP: 1  # 保留最近30天的记录
+          DAYS_TO_KEEP: 0  # 保留最近30天的记录
           KEEP_MINIMUM_RUNS: 1  # 每个工作流至少保留10条记录
         run: |
           node -e '
