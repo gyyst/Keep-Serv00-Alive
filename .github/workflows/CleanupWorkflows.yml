@@ -30,9 +30,10 @@ jobs:
           KEEP_MINIMUM_RUNS: 0  # 每个工作流至少保留10条记录
         run: |
           node -e '
-            const { Octokit } = require("@octokit/rest");
-            
             async function cleanupWorkflowRuns() {
+              // 使用动态导入替代require
+              const { Octokit } = await import("@octokit/rest");
+              
               // 初始化 Octokit
               const octokit = new Octokit({
                 auth: process.env.GITHUB_TOKEN,
