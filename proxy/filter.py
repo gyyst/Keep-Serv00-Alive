@@ -10,7 +10,6 @@ host = parsed_url.netloc
 path = parsed_url.path
 
 # 从result.txt读取内容作为payload
-# 使用os.path获取绝对路径，确保在不同环境下都能正确找到文件
 with open('proxy/result.txt', 'r', encoding='utf-8') as f:
     payload = f.read().strip()
 
