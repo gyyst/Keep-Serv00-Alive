@@ -1,0 +1,113 @@
+name: Cleanup GitHub Actions Workflows
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # 每周日午夜运行一次
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install @octokit/rest
+
+      - name: Cleanup workflow runs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.repository.name }}
+          # 可选配置
+          DAYS_TO_KEEP: 1  # 保留最近30天的记录
+          KEEP_MINIMUM_RUNS: 0  # 每个工作流至少保留10条记录
+        run: |
+          node -e '
+            const { Octokit } = require("@octokit/rest");
+            
+            async function cleanupWorkflowRuns() {
+              // 初始化 Octokit
+              const octokit = new Octokit({
+                auth: process.env.GITHUB_TOKEN,
+              });
+              
+              const owner = process.env.REPO_OWNER;
+              const repo = process.env.REPO_NAME || "${{ github.event.repository.name }}";
+              const daysToKeep = parseInt(process.env.DAYS_TO_KEEP || "30");
+              const keepMinimumRuns = parseInt(process.env.KEEP_MINIMUM_RUNS || "10");
+              
+              console.log(`开始清理 ${owner}/${repo} 的工作流运行记录...`);
+              
+              try {
+                // 获取所有工作流
+                const { data: workflows } = await octokit.actions.listRepoWorkflows({
+                  owner,
+                  repo,
+                });
+                
+                console.log(`找到 ${workflows.workflows.length} 个工作流`);
+                
+                // 计算截止日期（保留最近N天的记录）
+                const cutoffDate = new Date();
+                cutoffDate.setDate(cutoffDate.getDate() - daysToKeep);
+                
+                // 遍历每个工作流
+                for (const workflow of workflows.workflows) {
+                  console.log(`处理工作流: ${workflow.name} (ID: ${workflow.id})`);
+                  
+                  // 获取该工作流的所有运行记录
+                  const { data: runs } = await octokit.actions.listWorkflowRuns({
+                    owner,
+                    repo,
+                    workflow_id: workflow.id,
+                    per_page: 100,  // 每页最多100条记录
+                  });
+                  
+                  console.log(`找到 ${runs.total_count} 条运行记录`);
+                  
+                  // 按创建时间排序
+                  const sortedRuns = runs.workflow_runs.sort((a, b) => 
+                    new Date(b.created_at) - new Date(a.created_at)
+                  );
+                  
+                  // 保留最近的N条记录
+                  const runsToKeep = sortedRuns.slice(0, keepMinimumRuns);
+                  const runsToDelete = sortedRuns.slice(keepMinimumRuns);
+                  
+                  // 删除超过保留天数的记录（但确保至少保留最小数量的记录）
+                  for (const run of runsToDelete) {
+                    const runDate = new Date(run.created_at);
+                    if (runDate < cutoffDate) {
+                      console.log(`删除运行记录: ${run.id} (创建于 ${run.created_at})`);
+                      try {
+                        await octokit.actions.deleteWorkflowRun({
+                          owner,
+                          repo,
+                          run_id: run.id,
+                        });
+                        console.log(`成功删除运行记录 ${run.id}`);
+                      } catch (error) {
+                        console.error(`删除运行记录 ${run.id} 失败:`, error.message);
+                      }
+                    } else {
+                      console.log(`保留运行记录: ${run.id} (创建于 ${run.created_at})，未超过保留天数`);
+                    }
+                  }
+                }
+                
+                console.log("清理工作流运行记录完成");
+              } catch (error) {
+                console.error("清理工作流运行记录时出错:", error.message);
+                process.exit(1);
+              }
+            }
+            
+            cleanupWorkflowRuns();
+          '
