@@ -2,7 +2,7 @@ name: Cleanup GitHub Actions Workflows
 
 on:
   schedule:
-    - cron: '0 * * * *'  # 每日8点运行一次
+    - cron: '0 8 * * *' 
   workflow_dispatch:  # 允许手动触发
 
 jobs:
