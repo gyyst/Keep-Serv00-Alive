@@ -1,0 +1,183 @@
+name: SSH Server Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */12 * * *"  # 每12小时运行一次
+
+jobs:
+  ssh-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests paramiko
+
+      - name: Run SSH check
+        env:
+          SERVER_JSON_URL: ${{ secrets.SERVER_JSON_URL }}  # 存储服务器信息JSON的URL
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH私钥（如果需要）
+        run: |
+          python - <<EOF
+          import os
+          import json
+          import requests
+          import paramiko
+          import time
+          from datetime import datetime
+
+          # 获取当前时间
+          current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+          print(f"开始检查服务器 - {current_time}")
+
+          # 从URL获取服务器信息
+          def fetch_servers_from_url():
+              server_url = os.getenv('SERVER_JSON_URL')
+              if not server_url:
+                  raise ValueError("❌ SERVER_JSON_URL 环境变量未设置")
+
+              try:
+                  # 添加请求头避免被拦截
+                  headers = {
+                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                      'Accept': 'application/json'
+                  }
+                  
+                  # 添加超时和SSL验证
+                  response = requests.get(
+                      server_url,
+                      headers=headers,
+                      timeout=10,
+                      verify=True
+                  )
+                  response.raise_for_status()
+                  
+                  # 验证JSON结构
+                  data = response.json()
+                  if 'servers' not in data:
+                      raise ValueError("⚠️ 无效的JSON结构: 缺少servers字段")
+                  
+                  return data['servers']
+              
+              except requests.exceptions.RequestException as e:
+                  raise Exception(f"🔗 网络请求失败: {str(e)}")
+              except json.JSONDecodeError:
+                  raise Exception("📄 响应内容不是有效JSON")
+
+          # 检查SSH连接
+          def check_ssh_connection(server):
+              result = {
+                  "host": server["host"],
+                  "port": server.get("port", 22),
+                  "username": server["username"],
+                  "status": "failed",
+                  "message": "",
+                  "timestamp": current_time
+              }
+              
+              try:
+                  # 创建SSH客户端
+                  ssh = paramiko.SSHClient()
+                  ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                  
+                  # 连接方式：密码或密钥
+                  connect_kwargs = {
+                      "hostname": server["host"],
+                      "port": server.get("port", 22),
+                      "username": server["username"],
+                      "timeout": 10
+                  }
+                  
+                  # 根据提供的认证方式选择
+                  if "password" in server:
+                      connect_kwargs["password"] = server["password"]
+                  elif "key" in server:
+                      # 使用提供的密钥
+                      key_file = paramiko.RSAKey.from_private_key(file_obj=server["key"])
+                      connect_kwargs["pkey"] = key_file
+                  elif os.getenv('SSH_KEY'):
+                      # 使用环境变量中的密钥
+                      key_data = os.getenv('SSH_KEY')
+                      key_file = paramiko.RSAKey.from_private_key(file_obj=key_data)
+                      connect_kwargs["pkey"] = key_file
+                  
+                  # 连接服务器
+                  print(f"正在连接到 {server['host']}:{connect_kwargs['port']} 使用用户名 {server['username']}")
+                  start_time = time.time()
+                  ssh.connect(**connect_kwargs)
+                  
+                  # 执行简单命令
+                  stdin, stdout, stderr = ssh.exec_command("echo 'SSH连接成功'")
+                  output = stdout.read().decode('utf-8').strip()
+                  
+                  # 关闭连接
+                  ssh.close()
+                  
+                  # 计算连接时间
+                  connection_time = time.time() - start_time
+                  
+                  result["status"] = "success"
+                  result["message"] = f"连接成功，耗时: {connection_time:.2f}秒"
+                  print(f"✅ {server['host']} 连接成功，耗时: {connection_time:.2f}秒")
+                  
+              except Exception as e:
+                  result["message"] = f"连接失败: {str(e)}"
+                  print(f"❌ {server['host']} 连接失败: {str(e)}")
+              
+              return result
+
+          # 主函数
+          def main():
+              try:
+                  # 获取服务器列表
+                  servers = fetch_servers_from_url()
+                  print(f"获取到 {len(servers)} 个服务器信息")
+                  
+                  # 检查每个服务器
+                  results = []
+                  for server in servers:
+                      # 检查是否需要跳过该服务器
+                      if server.get("skip", False):
+                          print(f"⏭️ 跳过服务器 {server['host']} (已设置为skip)") 
+                          result = {
+                              "host": server["host"],
+                              "port": server.get("port", 22),
+                              "username": server["username"],
+                              "status": "skipped",
+                              "message": "服务器已设置为跳过检查",
+                              "timestamp": current_time
+                          }
+                          results.append(result)
+                          continue
+                          
+                      result = check_ssh_connection(server)
+                      results.append(result)
+                  
+                  # 输出结果摘要
+                  success_count = sum(1 for r in results if r["status"] == "success")
+                  skipped_count = sum(1 for r in results if r["status"] == "skipped")
+                  checked_count = len(results) - skipped_count
+                  print(f"\n检查完成: {success_count}/{checked_count} 个服务器连接成功, {skipped_count} 个服务器被跳过")
+                  
+                  # 保存结果到文件
+                  with open('ssh_check_results.json', 'w') as f:
+                      json.dump(results, f, indent=2, ensure_ascii=False)
+                  
+                  print("结果已保存到 ssh_check_results.json")
+                  
+              except Exception as e:
+                  print(f"执行过程中出错: {str(e)}")
+                  exit(1)
+
+          if __name__ == "__main__":
+              main()
+          EOF
