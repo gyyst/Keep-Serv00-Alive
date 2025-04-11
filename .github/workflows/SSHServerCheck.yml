@@ -3,7 +3,7 @@ name: SSH Server Check
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */12 * * *"  # 每12小时运行一次
+    - cron: "0 0 1 * *"  # 每月1号0点运行一次
 
 jobs:
   ssh-check:
