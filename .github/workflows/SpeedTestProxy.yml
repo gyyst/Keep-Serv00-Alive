@@ -3,9 +3,7 @@ name: Speedtest Proxyz Node
 on:
   workflow_dispatch:
   schedule:
-    # 每天中国时间10点和19点执行（北京时间UTC+8）
-    - cron: "0 2 * * *"  # 北京时间10:00 (UTC+8)
-    - cron: "0 11 * * *" # 北京时间19:00 (UTC+8)
+    - cron: "0 2,11 * * *"  # 北京时间10:00 19:00(UTC+8)
 
 jobs:
   speedtest-proxy:
