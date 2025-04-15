@@ -2,8 +2,8 @@ name: Pingtest Proxyz Node
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0-16/2 * * *"
+  # schedule:
+  #   - cron: "0 0-16/2 * * *"
 
 jobs:
   speedtest-proxy:
