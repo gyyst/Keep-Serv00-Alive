@@ -1,0 +1,47 @@
+name: Pingtest Proxyz Nodecp
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 0-16/2 * * *"
+
+jobs:
+  speedtest-proxy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Download and extract clash-speedtest
+        run: |
+          mkdir -p proxy
+          wget https://github.com/gyyst/clash-speedtest/releases/latest/download/clash-speedtest_Linux_x86_64.tar.gz -O clash-speedtest.tar.gz
+          tar -xzf clash-speedtest.tar.gz -C proxy/
+          rm clash-speedtest.tar.gz
+
+      - name: Make clash-speedtest executable
+        run: |
+          chmod +x proxy/clash-speedtest
+
+      - name: Run clash-speedtest
+        env:
+          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取TEST_URL
+        run: |
+          proxy/clash-speedtest -c $SUB_URL?clash -output proxy/result.txt -concurrent 8 -max-latency 2000ms -min-download-speed 0 -min-upload-speed 0
+
+
+      - name: Run filter script
+        env:
+          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
+        run: |
+          python proxy/filter.py
