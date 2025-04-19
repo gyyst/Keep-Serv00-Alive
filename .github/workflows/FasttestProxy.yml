@@ -3,8 +3,8 @@ name: Fasttest Proxyz Node
 on:
   workflow_dispatch:
   workflow_call:
-    inputs:
-      flag:
+    secrets:
+      SUB_URL:
         required: true
         type: string
 jobs:

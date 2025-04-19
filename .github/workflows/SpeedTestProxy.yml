@@ -48,5 +48,5 @@ jobs:
   pingtest-proxy:
     needs: speedtest-proxy
     uses: ./.github/workflows/FasttestProxy.yml
-    with:
-      flag: "true"
+    secrets:
+      SUB_URL: ${{ secrets.SUB_URL }}
