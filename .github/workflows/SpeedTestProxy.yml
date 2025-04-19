@@ -46,6 +46,7 @@ jobs:
         run: |
           python proxy/filter.py
   pingtest-proxy:
+    needs: speedtest-proxy
     uses: ./.github/workflows/FasttestProxy.yml
     with:
       flag: "true"
