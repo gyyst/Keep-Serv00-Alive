@@ -1,12 +1,14 @@
-name: Pingtest Proxyz Nodecp
+name: Fasttest Proxyz Node
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 0-16/2 * * *"
-
+  workflow_call:
+    inputs:
+      flag:
+        required: true
+        type: string
 jobs:
-  speedtest-proxy:
+  fasttest-proxy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,7 +39,7 @@ jobs:
         env:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取TEST_URL
         run: |
-          proxy/clash-speedtest -c $SUB_URL?clash -output proxy/result.txt -concurrent 8 -max-latency 2000ms -min-download-speed 0 -min-upload-speed 0
+          proxy/clash-speedtest -c $SUB_URL?clash -output proxy/result.txt -max-latency 2000ms -fast
 
 
       - name: Run filter script

@@ -45,3 +45,8 @@ jobs:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
         run: |
           python proxy/filter.py
+  pingtest-proxy::
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/
+    with:
+      flag: true
