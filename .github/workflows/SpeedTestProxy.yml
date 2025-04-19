@@ -37,7 +37,7 @@ jobs:
         env:
           TEST_URL: ${{ secrets.TEST_URL }}  # 从仓库Secrets读取TEST_URL
         run: |
-          proxy/clash-speedtest -c $TEST_URL -output proxy/result.txt -concurrent 8 -max-latency 1000ms -min-download-speed 5 -min-upload-speed 0.5 -limit 50
+          proxy/clash-speedtest -c $TEST_URL -output proxy/result.txt -concurrent 8 -max-latency 1000ms -min-download-speed 5 -min-upload-speed 0.5
 
 
       - name: Run filter script
