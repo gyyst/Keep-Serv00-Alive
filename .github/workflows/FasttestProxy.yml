@@ -6,7 +6,6 @@ on:
     secrets:
       SUB_URL:
         required: true
-        type: string
 jobs:
   fasttest-proxy:
     runs-on: ubuntu-latest
