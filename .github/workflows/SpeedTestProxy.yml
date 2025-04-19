@@ -46,7 +46,6 @@ jobs:
         run: |
           python proxy/filter.py
   pingtest-proxy::
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/FasttestProxy.yml
     with:
-      flag: true
+      flag: "true"
