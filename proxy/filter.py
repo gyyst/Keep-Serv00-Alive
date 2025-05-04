@@ -13,6 +13,11 @@ path = parsed_url.path
 with open('proxy/result.txt', 'r', encoding='utf-8') as f:
     payload = f.read().strip()
 
+# 如果文件内容为空则跳过后续操作
+if not payload:
+    print("文件内容为空，跳过请求操作")
+    sys.exit(0)
+
 headers = {
    'authority': host,
    'method': 'POST',
