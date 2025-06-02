@@ -66,7 +66,6 @@ def main():
             else:
                 print(f"Pay request ({idx}) WARNING: Renewal success indicator not found.")
                 
-            print(f"Pay request ({idx}) response:", response_text)
         except requests.exceptions.RequestException as e:
             print(f"Error during pay POST request ({idx}):", e)
 
