@@ -39,7 +39,6 @@ jobs:
         run: |
           proxy/clash-speedtest -c $TEST_URL -output proxy/result.txt -concurrent 1 -max-latency 1000ms -min-download-speed 5 -min-upload-speed 0.5
 
-
       - name: Run filter script
         env:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL

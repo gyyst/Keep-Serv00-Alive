@@ -1,0 +1,26 @@
+name: Swap VPS Login
+
+on:
+  schedule:
+    - cron: '0 0 */7 * *'  # Runs every 7 days at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  swap-vps-login:
+    runs-on: ubuntu-latest
+    env:
+      SWAP_VPS_SECRET_JSON: ${{ secrets.SWAP_VPS_SECRET_JSON }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      - name: Run swap_vps_login script
+        run: |
+          python polarbear/run.py
