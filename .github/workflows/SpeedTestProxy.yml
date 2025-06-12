@@ -3,7 +3,7 @@ name: Speedtest Proxyz Node
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0,9 * * *"  # 北京时间10:00 19:00(UTC+8)
+    - cron: "0 7,22 * * *"  # 北京时间6:00 15:00(UTC+8)
 
 jobs:
   speedtest-proxy:
