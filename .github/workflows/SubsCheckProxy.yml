@@ -3,7 +3,7 @@ name: SubsCheck Proxy Test
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8,23 * * *"  # 北京时间16:00 7:00(UTC+8)
+    - cron: "0 */6 * * *"  # 北京时间6:00, 12:00, 18:00, 0:00(UTC+8)
 
 jobs:
   subscheck-proxy:
