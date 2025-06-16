@@ -44,7 +44,7 @@ jobs:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
         run: |
           cd proxy
-          ./subs-check -c proxy/config.yaml
+          ./subs-check -f proxy/config.yaml
 
       - name: Run filter script
         env:
