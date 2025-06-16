@@ -39,17 +39,12 @@ jobs:
         run: |
           wget $CONFIG_URL -O proxy/config.yaml
           chmod 644 proxy/config.yaml
-          pwd
-          ls
-          cd proxy
-          ls
 
       - name: Run subs-check
         env:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
         run: |
-          cd proxy
-          ./subs-check -f proxy/config.yaml
+          proxy/subs-check -f proxy/config.yaml
 
       - name: Run filter script
         env:
