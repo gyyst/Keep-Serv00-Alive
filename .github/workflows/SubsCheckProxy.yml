@@ -1,0 +1,62 @@
+name: SubsCheck Proxy Test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8,23 * * *"  # 北京时间16:00 7:00(UTC+8)
+
+jobs:
+  subscheck-proxy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Download and extract subs-check
+        run: |
+          mkdir -p proxy
+          wget https://github.com/beck-8/subs-check/releases/latest/download/subs-check_Linux_x86_64.tar.gz -O subs-check.tar.gz
+          tar -xzf subs-check.tar.gz -C proxy/
+          rm subs-check.tar.gz
+
+      - name: Make subs-check executable
+        run: |
+          chmod +x proxy/subs-check
+
+      - name: Download YAML config file
+        env:
+          CONFIG_URL: ${{ secrets.SUBS_CHECK_CONFIG_URL }}  # 从仓库Secrets读取CONFIG_URL
+        run: |
+          wget $CONFIG_URL -O proxy/config.yaml
+
+      - name: Run subs-check
+        env:
+          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
+        run: |
+          cd proxy
+          ./subs-check -c proxy/config.yaml
+
+      - name: Run filter script
+        env:
+          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
+        run: |
+          python proxy/subscheck.py
+          
+      # - name: Write timestamp to time.txt and update repository
+      #   run: |
+      #     echo "$(date -u '+%Y-%m-%d %H:%M:%S UTC')" > proxy/time.txt
+      #     git config --global user.name "github-actions"
+      #     git config --global user.email "github-actions@github.com"
+      #     git add proxy/time.txt
+      #     git commit -m "Update subscheck proxy test timestamp" || exit 0
+      #     git push || exit 0
