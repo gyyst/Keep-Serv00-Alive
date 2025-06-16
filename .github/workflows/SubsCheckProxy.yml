@@ -40,18 +40,18 @@ jobs:
           wget $CONFIG_URL -O proxy/config.yaml
           chmod 644 proxy/config.yaml
 
+      - name: Make shell executable
+        env:
+          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
+        run: |
+          chmod +x proxy/subscheckCallback.sh
+      
       - name: Run subs-check
         env:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
         run: |
           proxy/subs-check -f proxy/config.yaml
 
-      - name: Run filter script
-        env:
-          SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
-        run: |
-          python proxy/subscheck.py
-          
       # - name: Write timestamp to time.txt and update repository
       #   run: |
       #     echo "$(date -u '+%Y-%m-%d %H:%M:%S UTC')" > proxy/time.txt
