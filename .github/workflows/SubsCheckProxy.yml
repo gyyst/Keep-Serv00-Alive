@@ -50,7 +50,19 @@ jobs:
         env:
           SUB_URL: ${{ secrets.SUB_URL }}  # 从仓库Secrets读取SUB_URL
         run: |
+          set +e # Allow subs-check to exit with non-zero without immediately failing the script
           proxy/subs-check -f proxy/config.yaml
+          EXIT_CODE=$?
+          set -e # Re-enable exit on error for subsequent commands
+
+          echo "subs-check process finished. Exit code: $EXIT_CODE"
+          if [ "$EXIT_CODE" -eq 0 ] || [ "$EXIT_CODE" -eq 143 ]; then
+            echo "subs-check exited with $EXIT_CODE (0 for success, 143 for SIGTERM). Accepting as success."
+            exit 0
+          else
+            echo "subs-check exited with $EXIT_CODE (unexpected error)."
+            exit $EXIT_CODE
+          fi
 
       - name: Write timestamp to time.txt and update repository
         run: |
