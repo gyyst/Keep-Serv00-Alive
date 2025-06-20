@@ -55,7 +55,8 @@ jobs:
           proxy/subs-check -f proxy/config.yaml
           EXIT_CODE=$?
           set -e # Re-enable exit on error for subsequent commands
-
+          cd proxy
+          ls
           echo "subs-check process finished. Exit code: $EXIT_CODE"
           if [ "$EXIT_CODE" -eq 0 ] || [ "$EXIT_CODE" -eq 143 ]; then
             echo "subs-check exited with $EXIT_CODE (0 for success, 143 for SIGTERM). Accepting as success."
