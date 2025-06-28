@@ -37,8 +37,9 @@ def is_base64(sb):
 
 if is_base64(payload):
     try:
-        decoded_payload = base64.b64decode(payload).decode('utf-8')
-        payload = urllib.parse.unquote(decoded_payload)
+        payload = base64.b64decode(payload).decode('utf-8')
+        # decoded_payload = base64.b64decode(payload).decode('utf-8')
+        # payload = urllib.parse.unquote(decoded_payload)
     except Exception as e:
         print(f"解码失败: {e}")
         sys.exit(1)
