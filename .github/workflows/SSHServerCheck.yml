@@ -96,7 +96,7 @@ jobs:
                   elif os.getenv("SSH_KEY"):
                       connect_kwargs["pkey"] = load_private_key(os.getenv("SSH_KEY"))
 
-                  print(f"🔌 正在连接到 {server_name} ({server['host']}:{connect_kwargs['port']}) 使用用户 {server['username']}")
+                  print(f"🔌 正在连接到 {server_name} ")
                   start_time = time.time()
                   ssh.connect(**connect_kwargs)
 
